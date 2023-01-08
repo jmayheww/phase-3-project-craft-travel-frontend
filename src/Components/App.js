@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import Header from "./Header";
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   return (
-    <div id="landing">
-      <h2>Test</h2>
-    </div>
+    <main className={isDarkMode ? "dark-mode" : ""}>
+      <Header isDarkMode={isDarkMode} onToggleDarkMode={setIsDarkMode} />
+    </main>
   );
 }
 
