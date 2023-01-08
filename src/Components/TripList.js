@@ -3,8 +3,6 @@ import Trip from "./Trip";
 
 function TripList({ allTrips }) {
   const renderTrips = allTrips.map((trip) => {
-    console.log("trip: ", trip);
-
     const { id, title, budget, start_date, end_date } = trip;
 
     return (
@@ -18,9 +16,12 @@ function TripList({ allTrips }) {
       </div>
     );
   });
+
   return (
     <>
-      <div className="trip-container">{renderTrips}</div>
+      <div className="trip-container">
+        {allTrips ? renderTrips : "Loading...please wait"}
+      </div>
       <div className="detail-container"></div>
     </>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 
-function Header({ isDarkMode, onToggleDarkMode }) {
+function Header({ toggleDarkMode }) {
   return (
     <header>
       <h1 id="app-title">Craft Travels</h1>
@@ -8,8 +8,7 @@ function Header({ isDarkMode, onToggleDarkMode }) {
         <input
           type="checkbox"
           id="toggle-dark-mode"
-          checked={isDarkMode}
-          onChange={(e) => onToggleDarkMode(e.target.checked)}
+          onChange={toggleDarkMode}
         />
         <label htmlFor="toggle-dark-mode"></label>
       </div>
