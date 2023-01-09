@@ -1,9 +1,11 @@
 import React from "react";
-import { Route, useHistory, useRouteMatch } from "react-router-dom";
+import { Route, useMatch } from "react-router-dom";
 import Trip from "./Trip";
 import TripDetail from "./TripDetail";
 
 function TripList({ allTrips }) {
+  // const match = useMatch();
+  // console.log('match: ', match);
   const renderTrips = allTrips.map((trip) => {
     const {
       id,
@@ -33,7 +35,9 @@ function TripList({ allTrips }) {
       <div className="trips-container">
         {allTrips ? renderTrips : "Loading...please wait"}
       </div>
-      <div className="detail-container"></div>
+      <div className="detail-container">
+        {/* <Route path={`${match.url}/:tripId`} element={<TripDetail />} /> */}
+      </div>
     </>
   );
 }

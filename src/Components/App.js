@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
+import { Route, Routes } from "react-router-dom";
+
 import Header from "./Header";
 import TripList from "./TripList";
 
@@ -25,7 +27,9 @@ function App() {
   return (
     <main ref={mainRef}>
       <Header isDarkMode={isDarkMode} toggleDarkMode={handleDarkModeToggle} />
-      <TripList allTrips={trips} />
+      <Routes>
+        <Route path="/trips" element={<TripList allTrips={trips} />} />
+      </Routes>
     </main>
   );
 }
