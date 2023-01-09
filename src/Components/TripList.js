@@ -1,5 +1,7 @@
 import React from "react";
+import { Route, useHistory, useRouteMatch } from "react-router-dom";
 import Trip from "./Trip";
+import TripDetail from "./TripDetail";
 
 function TripList({ allTrips }) {
   const renderTrips = allTrips.map((trip) => {
