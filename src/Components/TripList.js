@@ -1,11 +1,12 @@
 import React from "react";
-import { Route, useMatch } from "react-router-dom";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
 import Trip from "./Trip";
 import TripDetail from "./TripDetail";
 
 function TripList({ allTrips }) {
-  // const match = useMatch();
-  // console.log('match: ', match);
+  const { pathname } = useLocation();
+  const curTrip = Number(pathname.replace("/trips/", ""));
+
   const renderTrips = allTrips.map((trip) => {
     const {
       id,
@@ -17,16 +18,20 @@ function TripList({ allTrips }) {
       img,
     } = trip;
 
+    const selected = id === curTrip;
+
     return (
-      <div className="trip-card" key={id}>
-        <Trip
-          tripTitle={title}
-          totalCost={budget}
-          startDate={start_date}
-          endDate={end_date}
-          users={participating_users}
-          img={img}
-        />
+      <div key={id} className={`trip-card ${selected ? "selected" : ""}`}>
+        <Link to={`/trips/${id}`}>
+          <Trip
+            tripTitle={title}
+            totalCost={budget}
+            startDate={start_date}
+            endDate={end_date}
+            users={participating_users}
+            img={img}
+          />
+        </Link>
       </div>
     );
   });
@@ -36,7 +41,9 @@ function TripList({ allTrips }) {
         {allTrips ? renderTrips : "Loading...please wait"}
       </div>
       <div className="detail-container">
-        {/* <Route path={`${match.url}/:tripId`} element={<TripDetail />} /> */}
+        <Routes>
+          <Route path={`trips/:tripId`} element={<TripDetail />} />
+        </Routes>
       </div>
     </>
   );

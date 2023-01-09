@@ -28,7 +28,7 @@ function App() {
     <main ref={mainRef}>
       <Header isDarkMode={isDarkMode} toggleDarkMode={handleDarkModeToggle} />
       <Routes>
-        <Route path="/trips" element={<TripList allTrips={trips} />} />
+        <Route path="*" element={<TripList allTrips={trips} />} />
       </Routes>
     </main>
   );
