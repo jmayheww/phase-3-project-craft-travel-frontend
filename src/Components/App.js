@@ -13,6 +13,7 @@ function App() {
     fetch(tripsUrl)
       .then((resp) => resp.json())
       .then((data) => {
+        console.log(data);
         setTrips(data);
       });
   }, []);

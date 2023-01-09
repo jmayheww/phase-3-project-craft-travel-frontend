@@ -1,14 +1,12 @@
 import React from "react";
 
-function TripCard({ title, budget, startDate, endDate }) {
+function Trip({ tripTitle, totalCost, startDate, endDate, users, img }) {
   return (
-    <div className="trip">
-      <h2>{title}</h2>
-      <p>{budget}</p>
-      <p>{startDate}</p>
-      <p>{endDate}</p>
-    </div>
+    <>
+      <h2>{tripTitle}</h2>
+      <img src={img} />
+    </>
   );
 }
 
-export default TripCard;
+export default Trip;
