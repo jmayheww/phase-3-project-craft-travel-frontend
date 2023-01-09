@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 
 import Header from "./Header";
 import TripList from "./TripList";
+import TripDetail from "./TripDetail";
 
 const tripsUrl = "http://localhost:9292/trips";
 
@@ -28,8 +29,10 @@ function App() {
     <main ref={mainRef}>
       <Header isDarkMode={isDarkMode} toggleDarkMode={handleDarkModeToggle} />
       <Routes>
-        <Route path="*" element={<TripList allTrips={trips} />} />
-      </Routes>
+        <Route path="/trips" element={<TripList allTrips={trips} />}>
+          <Route path=":tripId" element={<TripDetail />} />
+        </Route>
+      </  Routes>
     </main>
   );
 }

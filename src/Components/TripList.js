@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Link, useLocation } from "react-router-dom";
+import { Routes, Route, Link, useLocation, Outlet } from "react-router-dom";
 import Trip from "./Trip";
 import TripDetail from "./TripDetail";
 
@@ -22,7 +22,7 @@ function TripList({ allTrips }) {
 
     return (
       <div key={id} className={`trip-card ${selected ? "selected" : ""}`}>
-        <Link to={`/trips/${id}`}>
+        <Link to={`${id}`}>
           <Trip
             tripTitle={title}
             totalCost={budget}
@@ -41,9 +41,7 @@ function TripList({ allTrips }) {
         {allTrips ? renderTrips : "Loading...please wait"}
       </div>
       <div className="detail-container">
-        <Routes>
-          <Route path={`trips/:tripId`} element={<TripDetail />} />
-        </Routes>
+        <Outlet />
       </div>
     </>
   );
