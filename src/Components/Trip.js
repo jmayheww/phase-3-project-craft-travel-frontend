@@ -1,23 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-function Trip({
-  tripTitle,
-  totalCost,
-  startDate,
-  endDate,
-  users,
-  id,
-  img,
-  handleTripClick,
-}) {
+function Trip({ trip, handleTripClick }) {
+  const { selected, tripTitle, id, img } = trip;
   return (
-    <>
+    <div className={`trip-card ${selected ? "selected" : ""}`}>
       <h2>{tripTitle}</h2>
-      <Link to={`${id}`} onClick={(e) => handleTripClick(e)}>
-        <img src={img} alt="trip" />
-      </Link>
-    </>
+      <img src={img} alt="trip" />
+      <button onClick={() => handleTripClick(id)}>Show details</button>
+    </div>
   );
 }
 

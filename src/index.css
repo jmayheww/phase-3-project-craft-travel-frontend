@@ -129,3 +129,28 @@ main.dark-mode header {
   width: 100vh;
   border: 1px solid deeppink;
 }
+
+/* trips-container */
+
+.trips-container {
+  display: flex;
+  height: 70vh;
+
+}
+
+.trips-list,
+.trips-view {
+
+  height: 100%;
+  width: 100%;
+}
+
+
+.trips-view {}
+
+.trip-card {}
+
+.trip-card.selected {
+  border: 1px solid red;
+
+}

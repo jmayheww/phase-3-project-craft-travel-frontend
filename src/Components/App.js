@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import Header from "./Header";
 import TripList from "./TripList";
@@ -9,8 +9,8 @@ const tripsUrl = "http://localhost:9292/trips";
 
 function App() {
   const [trips, setTrips] = useState([]);
-  const [showDetail, setShowDetail] = useState(false);
   const mainRef = useRef(null);
+  let nav = useNavigate();
 
   useEffect(() => {
     fetch(tripsUrl)
@@ -25,8 +25,8 @@ function App() {
     mainRef?.current?.classList?.toggle("dark-mode");
   }
 
-  function handleTripClick() {
-    setShowDetail(true);
+  function handleTripClick(id) {
+    nav(`/trips/${id}`);
   }
 
   return (
@@ -36,11 +36,7 @@ function App() {
         <Route
           path="/trips"
           element={
-            <TripList
-              allTrips={trips}
-              showDetail={showDetail}
-              handleTripClick={handleTripClick}
-            />
+            <TripList allTrips={trips} handleTripClick={handleTripClick} />
           }
         >
           <Route path=":tripId" element={<TripDetail url={tripsUrl} />} />
