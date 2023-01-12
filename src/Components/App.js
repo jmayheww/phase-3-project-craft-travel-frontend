@@ -32,6 +32,7 @@ function App() {
   return (
     <main ref={mainRef}>
       <Header toggleDarkMode={handleDarkModeToggle} />
+      <Search trips={trips} />
       <Routes>
         <Route
           path="/trips"

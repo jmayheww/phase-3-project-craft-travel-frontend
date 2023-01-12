@@ -75,6 +75,11 @@ main.dark-mode header {
   color: var(--dark-color-1)
 }
 
+main.dark-mode .trips-container {
+
+  color: var(--light-header)
+}
+
 
 #app-title {
   padding: 0.5rem;
@@ -134,7 +139,9 @@ main.dark-mode header {
 
 .trips-container {
   display: flex;
-  height: 70vh;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
 
 }
 
@@ -146,11 +153,24 @@ main.dark-mode header {
 }
 
 
-.trips-view {}
+.trips-view {
+  width: 75%;
+  overflow-y: scroll;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
 
-.trip-card {}
+.trip-card {
+  margin: 1rem 0;
+  padding: .5rem;
+  border: 3px solid transparent;
+  transition: all .1s;
+}
 
 .trip-card.selected {
-  border: 1px solid red;
+  border: 3px solid var(--light-header);
 
 }

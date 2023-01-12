@@ -1,7 +1,7 @@
 import React from "react";
 
-function Trip({ trip, handleTripClick }) {
-  const { selected, title, id, img } = trip;
+function Trip({ trip, handleTripClick, selected }) {
+  const { title, id, img } = trip;
 
   return (
     <div className={`trip-card ${selected ? "selected" : ""}`}>
