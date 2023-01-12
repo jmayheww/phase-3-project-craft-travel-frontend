@@ -9,6 +9,7 @@ const tripsUrl = "http://localhost:9292/trips";
 
 function App() {
   const [trips, setTrips] = useState([]);
+  const [showDetail, setShowDetail] = useState(false);
   const mainRef = useRef(null);
 
   useEffect(() => {
@@ -24,11 +25,24 @@ function App() {
     mainRef?.current?.classList?.toggle("dark-mode");
   }
 
+  function handleTripClick() {
+    setShowDetail((current) => !current);
+  }
+
   return (
     <main ref={mainRef}>
       <Header toggleDarkMode={handleDarkModeToggle} />
       <Routes>
-        <Route path="/trips" element={<TripList allTrips={trips} />}>
+        <Route
+          path="/trips"
+          element={
+            <TripList
+              allTrips={trips}
+              showDetail={showDetail}
+              handleTripClick={handleTripClick}
+            />
+          }
+        >
           <Route path=":tripId" element={<TripDetail />} />
         </Route>
       </Routes>

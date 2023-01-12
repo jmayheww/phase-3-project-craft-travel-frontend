@@ -1,8 +1,8 @@
 import React from "react";
-import { Link, useLocation, Outlet } from "react-router-dom";
+import { useLocation, Outlet } from "react-router-dom";
 import Trip from "./Trip";
 
-function TripList({ allTrips }) {
+function TripList({ allTrips, showDetail, handleTripClick }) {
   const { pathname } = useLocation();
   const curTrip = Number(pathname.replace("/trips/", ""));
 
@@ -21,16 +21,16 @@ function TripList({ allTrips }) {
 
     return (
       <div key={id} className={`trip-card ${selected ? "selected" : ""}`}>
-        <Link to={`${id}`}>
-          <Trip
-            tripTitle={title}
-            totalCost={budget}
-            startDate={start_date}
-            endDate={end_date}
-            users={participating_users}
-            img={img}
-          />
-        </Link>
+        <Trip
+          tripTitle={title}
+          totalCost={budget}
+          startDate={start_date}
+          endDate={end_date}
+          users={participating_users}
+          id={id}
+          img={img}
+          handleTripClick={handleTripClick}
+        />
       </div>
     );
   });
@@ -39,9 +39,7 @@ function TripList({ allTrips }) {
       <div className="trips-container">
         {allTrips ? renderTrips : "Loading...please wait"}
       </div>
-      <div className="detail-container">
-        <Outlet />
-      </div>
+      <div className="detail-container">{showDetail ? <Outlet /> : ""}</div>
     </>
   );
 }
