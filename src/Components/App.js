@@ -8,7 +8,6 @@ import TripDetail from "./TripDetail";
 const tripsUrl = "http://localhost:9292/trips";
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [trips, setTrips] = useState([]);
   const mainRef = useRef(null);
 
@@ -27,12 +26,12 @@ function App() {
 
   return (
     <main ref={mainRef}>
-      <Header isDarkMode={isDarkMode} toggleDarkMode={handleDarkModeToggle} />
+      <Header toggleDarkMode={handleDarkModeToggle} />
       <Routes>
         <Route path="/trips" element={<TripList allTrips={trips} />}>
           <Route path=":tripId" element={<TripDetail />} />
         </Route>
-      </  Routes>
+      </Routes>
     </main>
   );
 }

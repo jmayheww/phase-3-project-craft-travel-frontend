@@ -10,7 +10,7 @@ root.render(
   // <Router basename={"trips"}>
   //   <App />
   // </Router>
-  <Router >
+  <Router>
     <App />
   </Router>
 );

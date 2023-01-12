@@ -1,7 +1,6 @@
 import React from "react";
-import { Routes, Route, Link, useLocation, Outlet } from "react-router-dom";
+import { Link, useLocation, Outlet } from "react-router-dom";
 import Trip from "./Trip";
-import TripDetail from "./TripDetail";
 
 function TripList({ allTrips }) {
   const { pathname } = useLocation();
