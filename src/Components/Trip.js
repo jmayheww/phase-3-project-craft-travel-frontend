@@ -14,7 +14,7 @@ function Trip({
   return (
     <>
       <h2>{tripTitle}</h2>
-      <Link to={`${id}`} onClick={handleTripClick}>
+      <Link to={`${id}`} onClick={(e) => handleTripClick(e)}>
         <img src={img} alt="trip" />
       </Link>
     </>

@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-function TripDetail() {
+function TripDetail({ url }) {
   const { tripId } = useParams();
 
-  return <h2>{tripId}</h2>;
+  useEffect(() => {
+    fetch(`${url}/${tripId}`)
+      .then((resp) => resp.json())
+      .then((data) => console.log(data));
+  });
+
+  return (
+    <>
+      <h2>{tripId}</h2>
+    </>
+  );
 }
 
 export default TripDetail;

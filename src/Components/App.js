@@ -26,7 +26,7 @@ function App() {
   }
 
   function handleTripClick() {
-    setShowDetail((current) => !current);
+    setShowDetail(true);
   }
 
   return (
@@ -43,7 +43,7 @@ function App() {
             />
           }
         >
-          <Route path=":tripId" element={<TripDetail />} />
+          <Route path=":tripId" element={<TripDetail url={tripsUrl} />} />
         </Route>
       </Routes>
     </main>
