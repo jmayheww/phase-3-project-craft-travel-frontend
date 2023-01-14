@@ -7,9 +7,6 @@ import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  // <Router basename={"trips"}>
-  //   <App />
-  // </Router>
   <Router>
     <App />
   </Router>

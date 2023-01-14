@@ -9,32 +9,42 @@ function TripDetail({ url }) {
     fetch(`${url}/${tripId}`)
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data);
+        console.log("data: ", data);
         setTripDetails(data);
       });
   }, [tripId]);
 
-  const { budget, start_date, end_date, participating_users } = tripDetails;
-  console.log("participating_users: ", participating_users);
+  const { budget, start_date, end_date, users_trips } = tripDetails;
+
+  const startDate = new Date(start_date).toLocaleDateString();
+  const endDate = new Date(end_date).toLocaleDateString();
 
   return (
-    <>
-      <h2>{tripId}</h2>
-      <p>Total Estimated Cost: ${budget}</p>
-      <p>Start Date: {start_date}</p>
-      <p>End Date: {end_date}</p>
-
-      {participating_users && (
-        <div>
-          Confirmed Travelers:{" "}
+    <div className="details">
+      <h2>Trip Details:</h2>
+      <p>Estimated Cost: ${budget}</p>
+      <p>
+        Dates: {startDate} - {endDate}
+      </p>
+      {users_trips && (
+        <div className="sign-up-details">
+          <h2>Registration Log:</h2>
           <ul>
-            {participating_users.map((user) => {
-              return <li key={user}>{user}</li>;
+            {users_trips.map((userTrip) => {
+              const timeStamp = userTrip.created_at;
+              const traveler = userTrip.user;
+
+              const { id, name } = traveler;
+              return (
+                <li key={id}>
+                  {name} : {timeStamp}
+                </li>
+              );
             })}
           </ul>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

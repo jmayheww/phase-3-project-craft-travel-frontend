@@ -1,27 +1,40 @@
 import React from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useParams, useNavigate } from "react-router-dom";
 import Trip from "./Trip";
 
-function TripList({ allTrips, handleTripClick }) {
-  const { tripId: curTrip } = useParams();
+function TripList({ trips, setTrips, handleTripClick, url }) {
+  const { tripId } = useParams();
 
-  const renderTrips = allTrips.map((trip) => {
+  const nav = useNavigate();
+
+  function onTripDelete(id) {
+    const updatedTrips = trips.filter((trip) => trip.id !== id);
+    setTrips(updatedTrips);
+
+    if (id === Number(tripId)) {
+      nav("/trips");
+    }
+  }
+
+  const renderTrips = trips.map((trip) => {
     return (
       <Trip
         key={trip.id}
         trip={trip}
         handleTripClick={handleTripClick}
-        selected={trip.id === Number(curTrip)}
+        selected={trip.id === Number(tripId)}
+        url={url}
+        onTripDelete={onTripDelete}
       />
     );
   });
   return (
     <div className="trips-container">
       <div className="trips-list">
-        {allTrips ? renderTrips : "Loading...please wait"}
+        {trips ? renderTrips : "Loading...please wait"}
       </div>
       <div className="trips-view">
-        {curTrip ? <Outlet /> : <div>Please select a trip</div>}
+        {tripId ? <Outlet /> : <div>Please select a trip</div>}
       </div>
     </div>
   );
