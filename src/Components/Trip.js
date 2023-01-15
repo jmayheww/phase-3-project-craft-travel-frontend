@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import styles from "./Modal.module.css";
+import Modal from "./Modal";
 
 function Trip({
   trip,
@@ -9,6 +11,7 @@ function Trip({
   showDetails,
 }) {
   const { title, id, img } = trip;
+  const [isOpen, setIsOpen] = useState(false);
 
   function handleDeleteClick(id) {
     fetch(`${url}/${id}`, {
@@ -22,8 +25,8 @@ function Trip({
       .catch((error) => alert("Operation failed, could not delete"));
   }
 
-  function handleSignUpClick(id) {
-    console.log(id);
+  function handleSignUpClick() {
+    setIsOpen(true);
   }
 
   return (
@@ -37,7 +40,13 @@ function Trip({
       <button onClick={() => handleTripClick(id)}>
         {showDetails ? "Show details" : "Hide Details"}
       </button>
-      <button onClick={() => handleSignUpClick(id)}>Sign up!</button>
+      <button
+        className={styles.primaryBtn}
+        onClick={() => handleSignUpClick(id)}
+      >
+        Sign up!
+      </button>
+      {isOpen && <Modal setIsOpen={setIsOpen} />}
     </div>
   );
 }
