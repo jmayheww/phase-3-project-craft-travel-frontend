@@ -2,9 +2,8 @@ import React from "react";
 import { Outlet, useParams, useNavigate } from "react-router-dom";
 import Trip from "./Trip";
 
-function TripList({ trips, setTrips, handleTripClick, url }) {
+function TripList({ trips, setTrips, handleTripClick, url, showDetails }) {
   const { tripId } = useParams();
-
   const nav = useNavigate();
 
   function onTripDelete(id) {
@@ -16,6 +15,8 @@ function TripList({ trips, setTrips, handleTripClick, url }) {
     }
   }
 
+  function handleAddUser() {}
+
   const renderTrips = trips.map((trip) => {
     return (
       <Trip
@@ -25,6 +26,7 @@ function TripList({ trips, setTrips, handleTripClick, url }) {
         selected={trip.id === Number(tripId)}
         url={url}
         onTripDelete={onTripDelete}
+        showDetails={showDetails}
       />
     );
   });

@@ -22,25 +22,36 @@ function TripDetail({ url }) {
   return (
     <div className="details">
       <h2>Trip Details:</h2>
-      <p>Estimated Cost: ${budget}</p>
       <p>
-        Dates: {startDate} - {endDate}
+        {" "}
+        Date: {startDate} - {endDate}
       </p>
+      <p>Cost: ${budget}</p>
       {users_trips && (
         <div className="sign-up-details">
           <h2>Registration Log:</h2>
           <ul>
-            {users_trips.map((userTrip) => {
-              const timeStamp = userTrip.created_at;
-              const traveler = userTrip.user;
+            {users_trips
+              .sort((a, b) => a.created_at - b.created_at)
+              .map((userTrip) => {
+                const timeStamp = userTrip.created_at;
+                const registrationDate = new Date(
+                  timeStamp
+                ).toLocaleDateString();
+                const registrationTime = new Date(
+                  timeStamp
+                ).toLocaleTimeString();
 
-              const { id, name } = traveler;
-              return (
-                <li key={id}>
-                  {name} : {timeStamp}
-                </li>
-              );
-            })}
+                const traveler = userTrip.user;
+
+                const { id, name } = traveler;
+                return (
+                  <li key={id}>
+                    {name} registered at {registrationTime} on{" "}
+                    {registrationDate}
+                  </li>
+                );
+              })}
           </ul>
         </div>
       )}

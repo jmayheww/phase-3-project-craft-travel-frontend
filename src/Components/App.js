@@ -11,6 +11,8 @@ const tripsUrl = "http://localhost:9292/trips";
 function App() {
   const [trips, setTrips] = useState([]);
   const [filterTrips, setFilterTrips] = useState([]);
+  const [showDetails, setShowDetails] = useState(false);
+
   const mainRef = useRef(null);
   let nav = useNavigate();
 
@@ -31,7 +33,8 @@ function App() {
   }
 
   function handleTripClick(id) {
-    nav(`/trips/${id}`);
+    setShowDetails((current) => !current);
+    return showDetails ? nav(`/trips/${id}`) : nav("/trips");
   }
 
   return (
@@ -47,6 +50,7 @@ function App() {
               setTrips={setTrips}
               handleTripClick={handleTripClick}
               url={tripsUrl}
+              showDetails={showDetails}
             />
           }
         >
