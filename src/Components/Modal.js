@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Modal.module.css";
 import { RiCloseLine } from "react-icons/ri";
 
 function Modal({ setIsOpen }) {
+  const [userInput, setUserInput] = useState("");
+
+  function handleUserInput(e) {
+    setUserInput(e.target.value);
+  }
+
+  function handleAddUser(e) {
+    e.preventDefault();
+    console.log(userInput);
+    setIsOpen(false);
+  }
   return (
     <>
       <div className={styles.darkBG} onClick={() => setIsOpen(false)} />
@@ -17,16 +28,17 @@ function Modal({ setIsOpen }) {
           <div className={styles.modalContent}>
             Please submit name of traveler:
           </div>
-          <form className="add-traveler-form">
+          <form className="add-traveler-form" onSubmit={handleAddUser}>
+            <input
+              type="text"
+              value={userInput}
+              onChange={handleUserInput}
+            ></input>
             <div className={styles.modalActions}>
               <div className={styles.actionsContainer}>
+                <button className={styles.deleteBtn}>Add Traveler</button>
                 <button
-                  className={styles.deleteBtn}
-                  onClick={() => setIsOpen(false)}
-                >
-                  Add Traveler
-                </button>
-                <button
+                  type="button"
                   className={styles.cancelBtn}
                   onClick={() => setIsOpen(false)}
                 >
