@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Route, Routes, useNavigate, useParams } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import Header from "./Header";
 import TripList from "./TripList";
@@ -11,10 +11,7 @@ const tripsUrl = "http://localhost:9292/trips";
 function App() {
   const [trips, setTrips] = useState([]);
   const [filterTrips, setFilterTrips] = useState([]);
-  const [showDetails, setShowDetails] = useState(false);
-
   const mainRef = useRef(null);
-  let nav = useNavigate();
 
   useEffect(() => {
     fetch(tripsUrl)
@@ -32,10 +29,11 @@ function App() {
     mainRef?.current?.classList?.toggle("dark-mode");
   }
 
-  function handleTripClick(id) {
-    setShowDetails((current) => !current);
-    return showDetails ? nav(`/trips/${id}`) : nav("/trips");
-  }
+  // function handleTripClick(id) {
+  //   setShowDetails((current) => !current);
+
+  //   return showDetails ? nav("/trips") : nav(`/trips/${id}`);
+  // }
 
   return (
     <main ref={mainRef}>
@@ -45,13 +43,7 @@ function App() {
         <Route
           path="/trips"
           element={
-            <TripList
-              trips={filterTrips}
-              setTrips={setTrips}
-              handleTripClick={handleTripClick}
-              url={tripsUrl}
-              showDetails={showDetails}
-            />
+            <TripList trips={filterTrips} setTrips={setTrips} url={tripsUrl} />
           }
         >
           <Route path=":tripId" element={<TripDetail url={tripsUrl} />} />

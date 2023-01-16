@@ -1,17 +1,14 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Modal.module.css";
 import Modal from "./Modal";
 
-function Trip({
-  trip,
-  handleTripClick,
-  selected,
-  url,
-  onTripDelete,
-  showDetails,
-}) {
+function Trip({ trip, selected, url, onTripDelete }) {
   const { title, id, img } = trip;
   const [isOpen, setIsOpen] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+
+  let nav = useNavigate();
 
   function handleDeleteClick(id) {
     fetch(`${url}/${id}`, {
@@ -29,6 +26,12 @@ function Trip({
     setIsOpen(true);
   }
 
+  function handleTripClick(id) {
+    setShowDetails((current) => !current);
+
+    return showDetails ? nav("/trips") : nav(`/trips/${id}`);
+  }
+
   return (
     <div className={`trip-card ${selected ? "selected" : ""}`}>
       <div className="remove" onClick={() => handleDeleteClick(id)}>
@@ -38,7 +41,7 @@ function Trip({
       <h2>{title}</h2>
       <img src={img} alt="trip" />
       <button onClick={() => handleTripClick(id)}>
-        {showDetails ? "Show details" : "Hide Details"}
+        {selected ? "Hide Details" : "Show details"}
       </button>
       <button
         className={styles.primaryBtn}

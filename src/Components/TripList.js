@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet, useParams, useNavigate } from "react-router-dom";
 import Trip from "./Trip";
 
-function TripList({ trips, setTrips, handleTripClick, url, showDetails }) {
+function TripList({ trips, setTrips, url }) {
   const { tripId } = useParams();
   const nav = useNavigate();
 
@@ -15,18 +15,14 @@ function TripList({ trips, setTrips, handleTripClick, url, showDetails }) {
     }
   }
 
-  function handleAddUser() {}
-
   const renderTrips = trips.map((trip) => {
     return (
       <Trip
         key={trip.id}
         trip={trip}
-        handleTripClick={handleTripClick}
         selected={trip.id === Number(tripId)}
         url={url}
         onTripDelete={onTripDelete}
-        showDetails={showDetails}
       />
     );
   });
