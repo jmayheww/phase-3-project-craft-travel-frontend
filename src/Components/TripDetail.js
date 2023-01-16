@@ -71,6 +71,7 @@ function TripDetail({ url, onAddUser, users }) {
               onAddUser={onAddUser}
               tripId={tripId}
               users={users}
+              usersTrips={users_trips}
             />
           )}
         </div>

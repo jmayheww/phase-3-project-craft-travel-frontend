@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import styles from "./Modal.module.css";
 import { RiCloseLine } from "react-icons/ri";
 
-function Modal({ setIsOpen, onAddUser, tripId }) {
+function Modal({ setIsOpen, onAddUser, tripId, users, usersTrips }) {
   const [userInput, setUserInput] = useState("");
+  const [newUser, setNewUser] = useState([]);
 
   function handleUserInput(e) {
     setUserInput(e.target.value);
@@ -11,54 +12,55 @@ function Modal({ setIsOpen, onAddUser, tripId }) {
 
   function handleUserSignup(e) {
     e.preventDefault();
+    const existingUser = users.find((user) => user.name === userInput);
 
-    fetch("http://localhost:9292/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: userInput,
-      }),
-    })
-      .then((resp) => resp.json())
-      .then((newUser) => {
-        console.log("newUser: ", newUser);
-        onAddUser(newUser);
+    const alreadySignedUp = usersTrips
+      .map((userTrip) => userTrip.user_id)
+      .includes(existingUser.id);
 
-        fetch(`http://localhost:9292/userstrips`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            user_id: newUser.id,
-            trip_id: tripId,
-          }),
-        })
-          .then((resp) => resp.json())
-          .then((data) => console.log(data));
-      });
 
-    // fetch("http://localhost:9292/userstrips", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     trip_id: tripId,
-    //     user_id: userNumber + 1,
-    //   }),
-    // })
-    //   .then((data) => console.log(data))
-    //   .catch((error) => console.log("error:", error));
-    // .then((data) => {
-    //   if (data.status === 500) {
-    //     alert(
-    //       "This user has already signed up for the trip! Please sign up with a new user name."
-    //     );
-    //   }
-    // });
+    const newUserBody = {
+      name: userInput,
+    };
+
+    const usersTripBody = {
+      trip_id: tripId,
+      user_id: existingUser ? existingUser.id : newUser.id,
+    };
+
+    if (!existingUser) {
+      fetch("http://localhost:9292/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUserBody),
+      })
+        .then((resp) => resp.json())
+        .then((data) => {
+          console.log("newUser: ", newUser);
+          onAddUser(data);
+          setNewUser(data);
+        });
+    }
+
+    if (alreadySignedUp) {
+      alert(
+        `${userInput} has already signed up for this trip. Please sign up with a new user. `
+      );
+    } else {
+      fetch("http://localhost:9292/userstrips", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(usersTripBody),
+      })
+        .then((resp) => resp.json())
+        .then((data) => {
+          console.log(data);
+        });
+    }
 
     setIsOpen(false);
   }
