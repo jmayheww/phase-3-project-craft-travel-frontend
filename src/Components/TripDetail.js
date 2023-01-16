@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import styles from "./Modal.module.css";
 import Modal from "./Modal";
 
-function TripDetail({ url }) {
+function TripDetail({ url, onAddUser }) {
   const { tripId } = useParams();
   const [tripDetails, setTripDetails] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +13,7 @@ function TripDetail({ url }) {
       .then((resp) => resp.json())
       .then((data) => {
         setTripDetails(data);
+        console.log("data: ", data);
       });
   }, [tripId]);
 
@@ -59,12 +60,15 @@ function TripDetail({ url }) {
                 );
               })}
           </ul>
+          <button
+            className={styles.primaryBtn}
+            onClick={() => handleSignUpClick()}
+          >
+            Sign up!
+          </button>
+          {isOpen && <Modal setIsOpen={setIsOpen} tripId={tripId} />}
         </div>
       )}
-      <button className={styles.primaryBtn} onClick={() => handleSignUpClick()}>
-        Sign up!
-      </button>
-      {isOpen && <Modal setIsOpen={setIsOpen} />}
     </div>
   );
 }

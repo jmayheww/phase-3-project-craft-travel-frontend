@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
 function Search({ trips, setFilterTrips }) {
-  const [userInput, setUserInput] = useState("");
-  console.log("userInput: ", userInput);
+  const [userSearchInput, setUserSearchInput] = useState("");
+  console.log("userInput: ", userSearchInput);
 
   function handleChange(e) {
-    setUserInput(e.target.value);
+    setUserSearchInput(e.target.value);
     const filterTripsByTitle = trips.filter((trip) => {
       const titleWords = trip.title.toLowerCase();
-      const caseSearchTerm = userInput.toLowerCase();
+      const caseSearchTerm = userSearchInput.toLowerCase();
 
       return titleWords.includes(caseSearchTerm);
     });
@@ -17,12 +17,12 @@ function Search({ trips, setFilterTrips }) {
 
   function clearInput(e) {
     e.preventDefault();
-    setUserInput("");
+    setUserSearchInput("");
   }
 
   function handleReset() {
     setFilterTrips(trips);
-    setUserInput("");
+    setUserSearchInput("");
   }
 
   return (
@@ -31,13 +31,13 @@ function Search({ trips, setFilterTrips }) {
         <input
           type="text"
           name="searchtrips"
-          value={userInput}
+          value={userSearchInput}
           placeholder="Search Trips by Name"
           className="search-input"
           onChange={handleChange}
         />
+        <button onClick={() => handleReset()}>Reset</button>
       </form>
-      <button onClick={handleReset}>Reset</button>
     </div>
   );
 }

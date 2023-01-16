@@ -2,15 +2,16 @@ import React from "react";
 import { Outlet, useParams, useNavigate } from "react-router-dom";
 import Trip from "./Trip";
 
-function TripList({ trips, setTrips, url }) {
+function TripList({ trips, url, setTrips}) {
   const { tripId } = useParams();
   const nav = useNavigate();
 
-  function onTripDelete(id) {
+  function handleTripDelete(id) {
     const updatedTrips = trips.filter((trip) => trip.id !== id);
     setTrips(updatedTrips);
 
     if (id === Number(tripId)) {
+      console.log("tripId: ", tripId);
       nav("/trips");
     }
   }
@@ -22,7 +23,7 @@ function TripList({ trips, setTrips, url }) {
         trip={trip}
         selected={trip.id === Number(tripId)}
         url={url}
-        onTripDelete={onTripDelete}
+        onTripDelete={handleTripDelete}
       />
     );
   });

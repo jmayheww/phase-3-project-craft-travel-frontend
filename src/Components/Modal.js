@@ -2,16 +2,52 @@ import React, { useState } from "react";
 import styles from "./Modal.module.css";
 import { RiCloseLine } from "react-icons/ri";
 
-function Modal({ setIsOpen }) {
+function Modal({ setIsOpen, users }) {
   const [userInput, setUserInput] = useState("");
+  console.log("userInput: ", userInput);
 
   function handleUserInput(e) {
     setUserInput(e.target.value);
   }
 
-  function handleAddUser(e) {
+  function handleUserSignup(e) {
     e.preventDefault();
-    console.log(userInput);
+
+    fetch("http://localhost:9292/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: userInput,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((newUser) => {
+        console.log(newUser)
+
+      });
+
+    // fetch("http://localhost:9292/userstrips", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     trip_id: tripId,
+    //     user_id: userNumber + 1,
+    //   }),
+    // })
+    //   .then((data) => console.log(data))
+    //   .catch((error) => console.log("error:", error));
+    // .then((data) => {
+    //   if (data.status === 500) {
+    //     alert(
+    //       "This user has already signed up for the trip! Please sign up with a new user name."
+    //     );
+    //   }
+    // });
+
     setIsOpen(false);
   }
   return (
@@ -28,7 +64,7 @@ function Modal({ setIsOpen }) {
           <div className={styles.modalContent}>
             Please submit name of traveler:
           </div>
-          <form className="add-traveler-form" onSubmit={handleAddUser}>
+          <form className="add-traveler-form" onSubmit={handleUserSignup}>
             <input
               type="text"
               value={userInput}
