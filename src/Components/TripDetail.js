@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import styles from "./Modal.module.css";
+import Modal from "./Modal";
 
 function TripDetail({ url }) {
   const { tripId } = useParams();
   const [tripDetails, setTripDetails] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     fetch(`${url}/${tripId}`)
       .then((resp) => resp.json())
       .then((data) => {
-        console.log("data: ", data);
         setTripDetails(data);
       });
   }, [tripId]);
@@ -18,6 +20,10 @@ function TripDetail({ url }) {
 
   const startDate = new Date(start_date).toLocaleDateString();
   const endDate = new Date(end_date).toLocaleDateString();
+
+  function handleSignUpClick() {
+    setIsOpen(true);
+  }
 
   return (
     <div className="details">
@@ -55,6 +61,10 @@ function TripDetail({ url }) {
           </ul>
         </div>
       )}
+      <button className={styles.primaryBtn} onClick={() => handleSignUpClick()}>
+        Sign up!
+      </button>
+      {isOpen && <Modal setIsOpen={setIsOpen} />}
     </div>
   );
 }
