@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Modal.module.css";
 import { RiCloseLine } from "react-icons/ri";
 import { createUserTrip } from "../Utilities/api-helpers";
 
-function Modal({ setIsOpen, onAddUser, tripId, users, usersTrips }) {
+function Modal({
+  setIsOpen,
+  onAddUser,
+  tripId,
+  users,
+  tripDetails,
+  setTripDetails,
+}) {
   const [userInput, setUserInput] = useState("");
+  const [newUser, setNewUser] = useState([]);
 
   function handleUserInput(e) {
     setUserInput(e.target.value);
@@ -13,6 +21,11 @@ function Modal({ setIsOpen, onAddUser, tripId, users, usersTrips }) {
   function handleUserSignup(e) {
     e.preventDefault();
     const existingUser = users.find((user) => user.name === userInput);
+    const alreadySignedup = existingUser?.users_trips
+      .map((userTrip) => {
+        return userTrip.trip_id;
+      })
+      .includes(Number(tripId));
     console.log("existingUser: ", existingUser);
 
     if (!existingUser) {
@@ -29,20 +42,30 @@ function Modal({ setIsOpen, onAddUser, tripId, users, usersTrips }) {
         .then((newUser) => {
           console.log("newUser: ", newUser);
           onAddUser(newUser);
-
-          createUserTrip(newUser.id);
+          setNewUser(newUser);
+          createUserTrip(newUser.id, tripId, setTripDetails);
         });
+    } else if (existingUser && !alreadySignedup) {
+      createUserTrip(existingUser.id, tripId, setTripDetails);
     } else {
+      alert(
+        `${existingUser.name} has already signed up for this trip. Only new users or users who have not already signed up may sign up for this trip.`
+      );
     }
+    //   const alreadySignedup = usersTrips
+    //     .map((userTrip) => {
+    //       console.log(userTrip.user_id);
+    //       return userTrip.user_id;
+    //     })
+    //     .includes(existingUser.id);
 
-    if (existingUser) {
-      const alreadySignedup = usersTrips
-        .map((userTrip) => {
-          console.log(userTrip.user_id);
-          return userTrip.user_id;
-        })
-        .includes(existingUser.id);
-    }
+    // if (existingUser) {
+    //   const alreadySignedup = usersTrips
+    //     .map((userTrip) => {
+    //       return userTrip.user_id;
+    //     })
+    //     .includes(existingUser.id);
+    // }
 
     setIsOpen(false);
   }

@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet, useParams, useNavigate } from "react-router-dom";
 import Trip from "./Trip";
 
-function TripList({ trips, url, setTrips}) {
+function TripList({ trips, url, setTrips }) {
   const { tripId } = useParams();
   const nav = useNavigate();
 

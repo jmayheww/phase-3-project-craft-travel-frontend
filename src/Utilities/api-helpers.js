@@ -1,4 +1,4 @@
-function createUserTrip(userId, tripId) {
+function createUserTrip(userId, tripId, setState) {
   fetch("http://localhost:9292/userstrips", {
     method: "POST",
     headers: {
@@ -18,6 +18,7 @@ function createUserTrip(userId, tripId) {
     })
     .then((data) => {
       console.log(data);
+      setState((currentDetails) => [...currentDetails.users_trips, data]);
     })
     .catch((error) => console.log(error));
 }
