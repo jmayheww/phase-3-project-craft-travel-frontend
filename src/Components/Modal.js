@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import styles from "./Modal.module.css";
 import { RiCloseLine } from "react-icons/ri";
 
-function Modal({ setIsOpen, users }) {
+function Modal({ setIsOpen, onAddUser, tripId }) {
   const [userInput, setUserInput] = useState("");
-  console.log("userInput: ", userInput);
 
   function handleUserInput(e) {
     setUserInput(e.target.value);
@@ -24,8 +23,21 @@ function Modal({ setIsOpen, users }) {
     })
       .then((resp) => resp.json())
       .then((newUser) => {
-        console.log(newUser)
+        console.log("newUser: ", newUser);
+        onAddUser(newUser);
 
+        fetch(`http://localhost:9292/userstrips`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_id: newUser.id,
+            trip_id: tripId,
+          }),
+        })
+          .then((resp) => resp.json())
+          .then((data) => console.log(data));
       });
 
     // fetch("http://localhost:9292/userstrips", {

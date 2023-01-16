@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import styles from "./Modal.module.css";
 import Modal from "./Modal";
 
-function TripDetail({ url, onAddUser }) {
+function TripDetail({ url, onAddUser, users }) {
   const { tripId } = useParams();
   const [tripDetails, setTripDetails] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +39,7 @@ function TripDetail({ url, onAddUser }) {
           <h2>Registration Log:</h2>
           <ul>
             {users_trips
-              .sort((a, b) => a.created_at - b.created_at)
+              .sort((a, b) => b.id - a.id)
               .map((userTrip) => {
                 const timeStamp = userTrip.created_at;
                 const registrationDate = new Date(
@@ -54,8 +54,7 @@ function TripDetail({ url, onAddUser }) {
                 const { id, name } = traveler;
                 return (
                   <li key={id}>
-                    {name} registered at {registrationTime} on{" "}
-                    {registrationDate}
+                    {registrationTime} : {name} registered on {registrationDate}
                   </li>
                 );
               })}
@@ -66,7 +65,14 @@ function TripDetail({ url, onAddUser }) {
           >
             Sign up!
           </button>
-          {isOpen && <Modal setIsOpen={setIsOpen} tripId={tripId} />}
+          {isOpen && (
+            <Modal
+              setIsOpen={setIsOpen}
+              onAddUser={onAddUser}
+              tripId={tripId}
+              users={users}
+            />
+          )}
         </div>
       )}
     </div>

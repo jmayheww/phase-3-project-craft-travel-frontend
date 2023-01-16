@@ -28,6 +28,7 @@ function App() {
       .then((resp) => resp.json())
       .then((data) => {
         setUsers(data);
+        console.log("users: ", data);
       });
   }, []);
 
@@ -56,7 +57,13 @@ function App() {
         >
           <Route
             path=":tripId"
-            element={<TripDetail url={tripsUrl} onAddUser={handleAddNewUser} />}
+            element={
+              <TripDetail
+                url={tripsUrl}
+                onAddUser={handleAddNewUser}
+                users={users}
+              />
+            }
           />
         </Route>
       </Routes>
