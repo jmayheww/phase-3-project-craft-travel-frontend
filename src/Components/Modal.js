@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styles from "./Modal.module.css";
 import { RiCloseLine } from "react-icons/ri";
+import { createUserTrip } from "../Utilities/api-helpers";
 
 function Modal({ setIsOpen, onAddUser, tripId, users, usersTrips }) {
   const [userInput, setUserInput] = useState("");
-  const [newUser, setNewUser] = useState([]);
 
   function handleUserInput(e) {
     setUserInput(e.target.value);
@@ -13,20 +13,7 @@ function Modal({ setIsOpen, onAddUser, tripId, users, usersTrips }) {
   function handleUserSignup(e) {
     e.preventDefault();
     const existingUser = users.find((user) => user.name === userInput);
-
-    const alreadySignedUp = usersTrips
-      .map((userTrip) => userTrip.user_id)
-      .includes(existingUser.id);
-
-
-    const newUserBody = {
-      name: userInput,
-    };
-
-    const usersTripBody = {
-      trip_id: tripId,
-      user_id: existingUser ? existingUser.id : newUser.id,
-    };
+    console.log("existingUser: ", existingUser);
 
     if (!existingUser) {
       fetch("http://localhost:9292/users", {
@@ -34,32 +21,27 @@ function Modal({ setIsOpen, onAddUser, tripId, users, usersTrips }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newUserBody),
+        body: JSON.stringify({
+          name: userInput,
+        }),
       })
         .then((resp) => resp.json())
-        .then((data) => {
+        .then((newUser) => {
           console.log("newUser: ", newUser);
-          onAddUser(data);
-          setNewUser(data);
+          onAddUser(newUser);
+
+          createUserTrip(newUser.id);
         });
+    } else {
     }
 
-    if (alreadySignedUp) {
-      alert(
-        `${userInput} has already signed up for this trip. Please sign up with a new user. `
-      );
-    } else {
-      fetch("http://localhost:9292/userstrips", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(usersTripBody),
-      })
-        .then((resp) => resp.json())
-        .then((data) => {
-          console.log(data);
-        });
+    if (existingUser) {
+      const alreadySignedup = usersTrips
+        .map((userTrip) => {
+          console.log(userTrip.user_id);
+          return userTrip.user_id;
+        })
+        .includes(existingUser.id);
     }
 
     setIsOpen(false);
