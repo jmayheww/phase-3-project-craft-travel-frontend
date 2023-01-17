@@ -3,7 +3,7 @@ import styles from "./Modal.module.css";
 import { RiCloseLine } from "react-icons/ri";
 import { createUserTrip } from "../Utilities/api-helpers";
 
-function Modal({
+function SignupModal({
   setIsOpen,
   onAddUser,
   tripId,
@@ -90,4 +90,4 @@ function Modal({
   );
 }
 
-export default Modal;
+export default SignupModal;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./Modal.module.css";
-import Modal from "./Modal";
+import SignupModal from "./SignupModal";
 
 function TripDetail({ url, onAddUser, users }) {
   const { tripId } = useParams();
@@ -70,7 +70,7 @@ function TripDetail({ url, onAddUser, users }) {
             Sign up!
           </button>
           {isOpen && (
-            <Modal
+            <SignupModal
               setIsOpen={setIsOpen}
               onAddUser={onAddUser}
               tripId={tripId}
