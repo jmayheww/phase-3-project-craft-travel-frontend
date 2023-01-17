@@ -19,7 +19,9 @@ function SignupModal({
 
   function handleUserSignup(e) {
     e.preventDefault();
-    const existingUser = users.find((user) => user.name === userInput);
+    const existingUser = users.find(
+      (user) => user.name.toLowerCase() === userInput.toLowerCase()
+    );
     const alreadySignedup = updateUsersTrips
       .map((userTrip) => {
         return userTrip.user_id;
@@ -64,26 +66,27 @@ function SignupModal({
           </button>
           <div className={styles.modalContent}>
             Please submit name of traveler:
-          </div>
-          <form className="add-traveler-form" onSubmit={handleUserSignup}>
-            <input
-              type="text"
-              value={userInput}
-              onChange={handleUserInput}
-            ></input>
-            <div className={styles.modalActions}>
-              <div className={styles.actionsContainer}>
-                <button className={styles.deleteBtn}>Add Traveler</button>
-                <button
-                  type="button"
-                  className={styles.cancelBtn}
-                  onClick={() => setIsOpen(false)}
-                >
-                  Cancel
-                </button>
+            <form className="add-traveler-form" onSubmit={handleUserSignup}>
+              <input
+                type="text"
+                value={userInput}
+                onChange={handleUserInput}
+                className="user-signup"
+              ></input>
+              <div className={styles.modalActions}>
+                <div className={styles.actionsContainer}>
+                  <button className={styles.deleteBtn}>Add Traveler</button>
+                  <button
+                    type="button"
+                    className={styles.cancelBtn}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </>

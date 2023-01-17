@@ -51,10 +51,14 @@ function App() {
     setUsers((users) => [...users, newUser]);
   }
 
+  function handleAddNewTrip(newTrip) {
+    setTrips((trips) => [...trips, newTrip]);
+  }
+
   return (
     <main ref={mainRef}>
       <Header toggleDarkMode={handleDarkModeToggle} />
-      <div className="top-bar">
+      <div>
         <ModalButton
           handleClick={handleNewTripClick}
           className={styles.primaryBtn}
@@ -81,7 +85,12 @@ function App() {
           />
         </Route>
       </Routes>
-      {isOpenTripModal && <CreateTripModal setIsOpen={setIsOpenTripModal} />}
+      {isOpenTripModal && (
+        <CreateTripModal
+          setIsOpen={setIsOpenTripModal}
+          onAddTrip={handleAddNewTrip}
+        />
+      )}
     </main>
   );
 }
