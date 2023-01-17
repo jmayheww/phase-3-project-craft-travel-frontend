@@ -7,6 +7,7 @@ import TripList from "./TripList";
 import TripDetail from "./TripDetail";
 import Search from "./Search";
 import { ModalButton } from "./ModalButton";
+import CreateTripModal from "./CreateTripModal";
 
 const tripsUrl = "http://localhost:9292/trips";
 const usersUrl = "http://localhost:9292/users";
@@ -15,7 +16,7 @@ function App() {
   const [trips, setTrips] = useState([]);
   const [users, setUsers] = useState([]);
   const [filterTrips, setFilterTrips] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenTripModal, setIsOpenTripModal] = useState(false);
   const mainRef = useRef(null);
 
   useEffect(() => {
@@ -43,7 +44,7 @@ function App() {
   }
 
   function handleNewTripClick() {
-    setIsOpen(true);
+    setIsOpenTripModal(true);
   }
 
   function handleAddNewUser(newUser) {
@@ -65,13 +66,7 @@ function App() {
         <Route
           path="/trips"
           element={
-            <TripList
-              trips={filterTrips}
-              setTrips={setTrips}
-              url={tripsUrl}
-              isOpen={isOpen}
-              setIsOpen={setIsOpen}
-            />
+            <TripList trips={filterTrips} setTrips={setTrips} url={tripsUrl} />
           }
         >
           <Route
@@ -81,13 +76,12 @@ function App() {
                 url={tripsUrl}
                 onAddUser={handleAddNewUser}
                 users={users}
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
               />
             }
           />
         </Route>
       </Routes>
+      {isOpenTripModal && <CreateTripModal setIsOpen={setIsOpenTripModal} />}
     </main>
   );
 }

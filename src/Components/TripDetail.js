@@ -4,10 +4,11 @@ import styles from "./Modal.module.css";
 import SignupModal from "./SignupModal";
 import { ModalButton } from "./ModalButton";
 
-function TripDetail({ url, onAddUser, users, isOpen, setIsOpen }) {
+function TripDetail({ url, onAddUser, users }) {
   const { tripId } = useParams();
   const [tripDetails, setTripDetails] = useState([]);
   const [updateUsersTrips, setUpdateUsersTrips] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     fetch(`${url}/${tripId}`)

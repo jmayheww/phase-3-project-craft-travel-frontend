@@ -2,7 +2,17 @@ import React, { useState, useEffect } from "react";
 import styles from "./Modal.module.css";
 import { RiCloseLine } from "react-icons/ri";
 
-function CreateTripModal() {
+function CreateTripModal({ setIsOpen }) {
+  const [tripFormInput, setTripFormInput] = useState("");
+
+  function handleUserInput(e) {
+    console.log(e);
+  }
+
+  function handleTripCreation() {
+    console.log("test");
+  }
+
   return (
     <>
       <div className={styles.darkBG} onClick={() => setIsOpen(false)} />
@@ -20,7 +30,7 @@ function CreateTripModal() {
           <form className="trip-form" onSubmit={handleTripCreation}>
             <input
               type="text"
-              value={userInput}
+              value={tripFormInput}
               onChange={handleUserInput}
             ></input>
             <div className={styles.modalActions}>
