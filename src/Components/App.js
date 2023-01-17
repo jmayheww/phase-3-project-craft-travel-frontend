@@ -28,7 +28,6 @@ function App() {
       .then((resp) => resp.json())
       .then((data) => {
         setUsers(data);
-        console.log("users: ", data);
       });
   }, []);
 

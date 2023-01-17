@@ -8,11 +8,10 @@ function Modal({
   onAddUser,
   tripId,
   users,
-  tripDetails,
-  setTripDetails,
+  setUpdateUsersTrips,
+  updateUsersTrips,
 }) {
   const [userInput, setUserInput] = useState("");
-  const [newUser, setNewUser] = useState([]);
 
   function handleUserInput(e) {
     setUserInput(e.target.value);
@@ -21,12 +20,11 @@ function Modal({
   function handleUserSignup(e) {
     e.preventDefault();
     const existingUser = users.find((user) => user.name === userInput);
-    const alreadySignedup = existingUser?.users_trips
+    const alreadySignedup = updateUsersTrips
       .map((userTrip) => {
-        return userTrip.trip_id;
+        return userTrip.user_id;
       })
-      .includes(Number(tripId));
-    console.log("existingUser: ", existingUser);
+      .includes(Number(existingUser?.id));
 
     if (!existingUser) {
       fetch("http://localhost:9292/users", {
@@ -40,32 +38,16 @@ function Modal({
       })
         .then((resp) => resp.json())
         .then((newUser) => {
-          console.log("newUser: ", newUser);
+          createUserTrip(newUser.id, tripId, setUpdateUsersTrips);
           onAddUser(newUser);
-          setNewUser(newUser);
-          createUserTrip(newUser.id, tripId, setTripDetails);
         });
     } else if (existingUser && !alreadySignedup) {
-      createUserTrip(existingUser.id, tripId, setTripDetails);
+      createUserTrip(existingUser.id, tripId, setUpdateUsersTrips);
     } else {
       alert(
         `${existingUser.name} has already signed up for this trip. Only new users or users who have not already signed up may sign up for this trip.`
       );
     }
-    //   const alreadySignedup = usersTrips
-    //     .map((userTrip) => {
-    //       console.log(userTrip.user_id);
-    //       return userTrip.user_id;
-    //     })
-    //     .includes(existingUser.id);
-
-    // if (existingUser) {
-    //   const alreadySignedup = usersTrips
-    //     .map((userTrip) => {
-    //       return userTrip.user_id;
-    //     })
-    //     .includes(existingUser.id);
-    // }
 
     setIsOpen(false);
   }

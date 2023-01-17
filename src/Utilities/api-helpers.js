@@ -10,17 +10,14 @@ function createUserTrip(userId, tripId, setState) {
     }),
   })
     .then((resp) => {
-      console.log("resp: ", resp);
       if (resp.ok) {
         return resp.json();
       }
       throw new Error("User is already signed up for this trip.");
     })
-    .then((data) => {
-      console.log(data);
-      setState((currentDetails) => [...currentDetails.users_trips, data]);
-    })
-    .catch((error) => console.log(error));
+    .then((newUsersTrip) => {
+      setState((currentDetails) => [...currentDetails, newUsersTrip]);
+    });
 }
 
 export { createUserTrip };

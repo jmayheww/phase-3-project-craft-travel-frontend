@@ -6,6 +6,7 @@ import Modal from "./Modal";
 function TripDetail({ url, onAddUser, users }) {
   const { tripId } = useParams();
   const [tripDetails, setTripDetails] = useState([]);
+  const [updateUsersTrips, setUpdateUsersTrips] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -13,9 +14,12 @@ function TripDetail({ url, onAddUser, users }) {
       .then((resp) => resp.json())
       .then((data) => {
         setTripDetails(data);
-        console.log("data: ", data);
       });
   }, [tripId]);
+
+  useEffect(() => {
+    setUpdateUsersTrips(users_trips);
+  }, [tripDetails]);
 
   const { budget, start_date, end_date, users_trips } = tripDetails;
 
@@ -34,11 +38,11 @@ function TripDetail({ url, onAddUser, users }) {
         Date: {startDate} - {endDate}
       </p>
       <p>Cost: ${budget}</p>
-      {users_trips && (
+      {updateUsersTrips && (
         <div className="sign-up-details">
           <h2>Registration Log:</h2>
           <ul>
-            {users_trips
+            {updateUsersTrips
               .sort((a, b) => b.id - a.id)
               .map((userTrip) => {
                 const timeStamp = userTrip.created_at;
@@ -71,9 +75,8 @@ function TripDetail({ url, onAddUser, users }) {
               onAddUser={onAddUser}
               tripId={tripId}
               users={users}
-              usersTrips={users_trips}
-              tripDetails={tripDetails}
-              setTripDetails={setTripDetails}
+              updateUsersTrips={updateUsersTrips}
+              setUpdateUsersTrips={setUpdateUsersTrips}
             />
           )}
         </div>

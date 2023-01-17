@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 function Search({ trips, setFilterTrips }) {
   const [userSearchInput, setUserSearchInput] = useState("");
-  console.log("userInput: ", userSearchInput);
 
   function handleChange(e) {
     setUserSearchInput(e.target.value);
