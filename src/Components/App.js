@@ -52,7 +52,7 @@ function App() {
   }
 
   function handleAddNewTrip(newTrip) {
-    setTrips((trips) => [...trips, newTrip]);
+    return setTrips((current) => [newTrip, ...current]);
   }
 
   return (
@@ -90,6 +90,7 @@ function App() {
           setIsOpen={setIsOpenTripModal}
           onAddTrip={handleAddNewTrip}
           url={tripsUrl}
+          trips={trips}
         />
       )}
     </main>

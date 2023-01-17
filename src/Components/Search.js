@@ -1,16 +1,21 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Search({ trips, setFilterTrips }) {
   const [userSearchInput, setUserSearchInput] = useState("");
+  const nav = useNavigate();
 
   function handleChange(e) {
+    nav("/trips");
     setUserSearchInput(e.target.value);
+
     const filterTripsByTitle = trips.filter((trip) => {
       const titleWords = trip.title.toLowerCase();
       const caseSearchTerm = userSearchInput.toLowerCase();
 
       return titleWords.includes(caseSearchTerm);
     });
+
     setFilterTrips(filterTripsByTitle);
   }
 
@@ -35,7 +40,9 @@ function Search({ trips, setFilterTrips }) {
           className="search-input"
           onChange={handleChange}
         />
-        <button onClick={() => handleReset()}>Reset</button>
+        <button type="submit" onClick={() => handleReset()}>
+          Reset
+        </button>
       </form>
     </div>
   );

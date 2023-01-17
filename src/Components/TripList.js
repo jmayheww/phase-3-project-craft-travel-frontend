@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet, useParams, useNavigate } from "react-router-dom";
 import Trip from "./Trip";
 
-function TripList({ trips, url, setTrips, isOpen, setIsOpen }) {
+function TripList({ trips, url, setTrips }) {
   const { tripId } = useParams();
   const nav = useNavigate();
 
@@ -11,7 +11,6 @@ function TripList({ trips, url, setTrips, isOpen, setIsOpen }) {
     setTrips(updatedTrips);
 
     if (id === Number(tripId)) {
-      console.log("tripId: ", tripId);
       nav("/trips");
     }
   }
