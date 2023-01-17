@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet, useParams, useNavigate } from "react-router-dom";
 import Trip from "./Trip";
 
-function TripList({ trips, url, setTrips }) {
+function TripList({ trips, url, setTrips, isOpen, setIsOpen }) {
   const { tripId } = useParams();
   const nav = useNavigate();
 
@@ -27,13 +27,16 @@ function TripList({ trips, url, setTrips }) {
       />
     );
   });
+
   return (
-    <div className="trips-container">
-      <div className="trips-list">
-        {trips ? renderTrips : "Loading...please wait"}
-      </div>
-      <div className="trips-view">
-        {tripId ? <Outlet /> : <div>Please select a trip</div>}
+    <div>
+      <div className="trips-container">
+        <div className="trips-list">
+          {trips ? renderTrips : "Loading...please wait"}
+        </div>
+        <div className="trips-view">
+          {tripId ? <Outlet /> : <div>Please select a trip</div>}
+        </div>
       </div>
     </div>
   );

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./Modal.module.css";
 import SignupModal from "./SignupModal";
+import { ModalButton } from "./ModalButton";
 
-function TripDetail({ url, onAddUser, users }) {
+function TripDetail({ url, onAddUser, users, isOpen, setIsOpen }) {
   const { tripId } = useParams();
   const [tripDetails, setTripDetails] = useState([]);
   const [updateUsersTrips, setUpdateUsersTrips] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     fetch(`${url}/${tripId}`)
@@ -63,12 +63,11 @@ function TripDetail({ url, onAddUser, users }) {
                 );
               })}
           </ul>
-          <button
+          <ModalButton
+            handleClick={handleSignUpClick}
             className={styles.primaryBtn}
-            onClick={() => handleSignUpClick()}
-          >
-            Sign up!
-          </button>
+            text="Sign up!"
+          />
           {isOpen && (
             <SignupModal
               setIsOpen={setIsOpen}
