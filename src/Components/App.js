@@ -55,6 +55,17 @@ function App() {
     return setTrips((current) => [newTrip, ...current]);
   }
 
+  function handleUpdateTrip(updatedTripObj) {
+    const updatedTrips = trips.map((trip) => {
+      if (trip.id === updatedTripObj.id) {
+        return updatedTripObj;
+      } else {
+        return trip;
+      }
+    });
+    setTrips(updatedTrips);
+  }
+
   return (
     <main ref={mainRef}>
       <Header toggleDarkMode={handleDarkModeToggle} />
@@ -70,7 +81,12 @@ function App() {
         <Route
           path="/trips"
           element={
-            <TripList trips={filterTrips} setTrips={setTrips} url={tripsUrl} />
+            <TripList
+              trips={filterTrips}
+              setTrips={setTrips}
+              url={tripsUrl}
+              onUpdateTrip={handleUpdateTrip}
+            />
           }
         >
           <Route

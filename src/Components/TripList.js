@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet, useParams, useNavigate } from "react-router-dom";
 import Trip from "./Trip";
 
-function TripList({ trips, url, setTrips }) {
+function TripList({ trips, url, setTrips, onUpdateTrip }) {
   const { tripId } = useParams();
   const nav = useNavigate();
 
@@ -23,6 +23,7 @@ function TripList({ trips, url, setTrips }) {
         selected={trip.id === Number(tripId)}
         url={url}
         onTripDelete={handleTripDelete}
+        onUpdateTrip={onUpdateTrip}
       />
     );
   });
