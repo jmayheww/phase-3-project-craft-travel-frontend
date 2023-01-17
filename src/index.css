@@ -155,7 +155,7 @@ main.dark-mode .trips-container {
 
 .trips-view {
   width: 75%;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   padding: 1rem;
   display: flex;
   flex-direction: column;

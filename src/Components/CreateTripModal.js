@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./Modal.module.css";
 import { RiCloseLine } from "react-icons/ri";
 
-function CreateTripModal({ setIsOpen, onAddTrip }) {
+function CreateTripModal({ setIsOpen, onAddTrip, url }) {
   const [newTrip, setNewTrip] = useState({
     title: "",
     budget: "",
@@ -14,10 +14,24 @@ function CreateTripModal({ setIsOpen, onAddTrip }) {
   function handleChange(e) {
     setNewTrip({ ...newTrip, [e.target.name]: e.target.value });
   }
+  console.log(newTrip);
 
   function handleTripCreation(e) {
     e.preventDefault();
-    console.log(newTrip);
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newTrip),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data);
+        onAddTrip(data);
+      });
+
     setIsOpen(false);
   }
 

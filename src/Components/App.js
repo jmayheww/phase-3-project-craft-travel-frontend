@@ -89,6 +89,7 @@ function App() {
         <CreateTripModal
           setIsOpen={setIsOpenTripModal}
           onAddTrip={handleAddNewTrip}
+          url={tripsUrl}
         />
       )}
     </main>

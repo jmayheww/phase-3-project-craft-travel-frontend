@@ -32,7 +32,7 @@ function Trip({ trip, selected, url, onTripDelete }) {
         <span>&times;</span>
       </div>
       <h2>{title}</h2>
-      <img src={img} alt="trip" />
+      <img src={img} alt="picture of trip" width="300" height="200" />
       <button onClick={() => handleTripClick(id)}>
         {selected ? "Hide Details" : "Show details"}
       </button>
