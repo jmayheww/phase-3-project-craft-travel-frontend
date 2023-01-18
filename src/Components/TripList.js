@@ -1,10 +1,9 @@
 import React from "react";
-import { Outlet, useParams, useNavigate } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import Trip from "./Trip";
 
-function TripList({ trips, url, setTrips, onUpdateTrip }) {
+function TripList({ trips, url, setTrips, onUpdateTrip, nav }) {
   const { tripId } = useParams();
-  const nav = useNavigate();
 
   function handleTripDelete(id) {
     const updatedTrips = trips.filter((trip) => trip.id !== id);
@@ -24,6 +23,7 @@ function TripList({ trips, url, setTrips, onUpdateTrip }) {
         url={url}
         onTripDelete={handleTripDelete}
         onUpdateTrip={onUpdateTrip}
+        nav={nav}
       />
     );
   });

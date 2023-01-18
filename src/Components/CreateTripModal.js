@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./Modal.module.css";
 import { RiCloseLine } from "react-icons/ri";
 
-function CreateTripModal({ setIsOpen, setUpdateTrips, url, onAddTrip }) {
+function CreateTripModal({ setIsOpen, url, onAddTrip }) {
   const [newTrip, setNewTrip] = useState({
     title: "",
     budget: "",

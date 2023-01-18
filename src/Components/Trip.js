@@ -1,15 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styles from "./Modal.module.css";
 import { ModalButton } from "./ModalButton";
 import EditTripModal from "./EditTripModal";
 
-function Trip({ trip, selected, url, onTripDelete, onUpdateTrip }) {
+function Trip({ trip, selected, url, onTripDelete, onUpdateTrip, nav }) {
   const { title, id, img } = trip;
-  const [showDetails, setShowDetails] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
-
-  let nav = useNavigate();
 
   function handleDeleteClick(id) {
     fetch(`${url}/${id}`, {
@@ -24,9 +20,7 @@ function Trip({ trip, selected, url, onTripDelete, onUpdateTrip }) {
   }
 
   function handleTripClick(id) {
-    setShowDetails((current) => !current);
-
-    return showDetails ? nav("/trips") : nav(`/trips/${id}`);
+    nav(`/trips/${id}`);
   }
 
   function handleEditClick() {
@@ -42,7 +36,8 @@ function Trip({ trip, selected, url, onTripDelete, onUpdateTrip }) {
       <h2>{title}</h2>
       <img src={img} alt="picture of trip" width="300" height="200" />
       <button onClick={() => handleTripClick(id)}>
-        {selected ? "Hide Details" : "Show details"}
+        {/* {selected ? "Hide Details" : "Show details"} */}
+        Show Details
       </button>
       <ModalButton
         handleClick={handleEditClick}

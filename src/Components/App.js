@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import styles from "./Modal.module.css";
 
 import Header from "./Header";
@@ -11,6 +11,7 @@ import CreateTripModal from "./CreateTripModal";
 
 const tripsUrl = "http://localhost:9292/trips";
 const usersUrl = "http://localhost:9292/users";
+const usersTripsUrl = "http://localhost:9292/users_trips";
 
 function App() {
   const [trips, setTrips] = useState([]);
@@ -18,6 +19,7 @@ function App() {
   const [filterTrips, setFilterTrips] = useState([]);
   const [isOpenTripModal, setIsOpenTripModal] = useState(false);
   const mainRef = useRef(null);
+  const nav = useNavigate();
 
   useEffect(() => {
     fetch(tripsUrl)
@@ -25,6 +27,7 @@ function App() {
       .then((data) => {
         setTrips(data);
       });
+    nav("/trips");
   }, []);
 
   useEffect(() => {
@@ -41,6 +44,10 @@ function App() {
 
   function handleDarkModeToggle() {
     mainRef?.current?.classList?.toggle("dark-mode");
+  }
+
+  function handleHideDetails() {
+    nav("/trips");
   }
 
   function handleNewTripClick() {
@@ -86,6 +93,7 @@ function App() {
               setTrips={setTrips}
               url={tripsUrl}
               onUpdateTrip={handleUpdateTrip}
+              nav={nav}
             />
           }
         >
@@ -93,9 +101,12 @@ function App() {
             path=":tripId"
             element={
               <TripDetail
-                url={tripsUrl}
+                url={usersTripsUrl}
                 onAddUser={handleAddNewUser}
                 users={users}
+                trips={trips}
+                handleHideDetails={handleHideDetails}
+                nav={nav}
               />
             }
           />

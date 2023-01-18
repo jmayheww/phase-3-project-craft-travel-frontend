@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { ModalButton } from "./ModalButton";
 import styles from "./Modal.module.css";
 import SignupModal from "./SignupModal";
-import { ModalButton } from "./ModalButton";
 
-function TripDetail({ url, onAddUser, users }) {
+function TripDetail({ url, onAddUser, users, trips, handleHideDetails }) {
   const { tripId } = useParams();
   const [tripDetails, setTripDetails] = useState([]);
-  const [updateUsersTrips, setUpdateUsersTrips] = useState([]);
+  const [userTripBookings, setUserTripBookings] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     fetch(`${url}/${tripId}`)
       .then((resp) => resp.json())
-      .then((data) => {
-        setTripDetails(data);
+      .then((userTrip) => {
+        const selectedTripDetails = trips.find(
+          (trip) => trip.id === Number(tripId)
+        );
+        setTripDetails(selectedTripDetails);
+        setUserTripBookings(userTrip);
       });
   }, [tripId]);
 
   useEffect(() => {
-    setUpdateUsersTrips(users_trips);
+    setUserTripBookings(users_trips);
   }, [tripDetails]);
 
   const { budget, start_date, end_date, users_trips } = tripDetails;
@@ -39,11 +43,11 @@ function TripDetail({ url, onAddUser, users }) {
         Date: {startDate} - {endDate}
       </p>
       <p>Cost: ${budget}</p>
-      {updateUsersTrips && (
+      {userTripBookings && (
         <div className="sign-up-details">
           <h2>Registration Log:</h2>
           <ul>
-            {updateUsersTrips
+            {userTripBookings
               .sort((a, b) => b.id - a.id)
               .map((userTrip) => {
                 const timeStamp = userTrip.created_at;
@@ -69,14 +73,17 @@ function TripDetail({ url, onAddUser, users }) {
             className={styles.primaryBtn}
             text="Sign up!"
           />
+          <button type="button" onClick={handleHideDetails}>
+            Hide Details
+          </button>
           {isOpen && (
             <SignupModal
               setIsOpen={setIsOpen}
               onAddUser={onAddUser}
               tripId={tripId}
               users={users}
-              updateUsersTrips={updateUsersTrips}
-              setUpdateUsersTrips={setUpdateUsersTrips}
+              userTripBookings={userTripBookings}
+              setUserTripBookings={setUserTripBookings}
             />
           )}
         </div>

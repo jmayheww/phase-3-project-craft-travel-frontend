@@ -8,8 +8,8 @@ function SignupModal({
   onAddUser,
   tripId,
   users,
-  setUpdateUsersTrips,
-  updateUsersTrips,
+  setUserTripBookings,
+  userTripBookings,
 }) {
   const [userInput, setUserInput] = useState("");
 
@@ -22,7 +22,7 @@ function SignupModal({
     const existingUser = users.find(
       (user) => user.name.toLowerCase() === userInput.toLowerCase()
     );
-    const alreadySignedup = updateUsersTrips
+    const alreadySignedup = userTripBookings
       .map((userTrip) => {
         return userTrip.user_id;
       })
@@ -40,11 +40,11 @@ function SignupModal({
       })
         .then((resp) => resp.json())
         .then((newUser) => {
-          createUserTrip(newUser.id, tripId, setUpdateUsersTrips);
+          createUserTrip(newUser.id, tripId, setUserTripBookings);
           onAddUser(newUser);
         });
     } else if (existingUser && !alreadySignedup) {
-      createUserTrip(existingUser.id, tripId, setUpdateUsersTrips);
+      createUserTrip(existingUser.id, tripId, setUserTripBookings);
     } else {
       alert(
         `${existingUser.name} has already signed up for this trip. Only new users or users who have not already signed up may sign up for this trip.`

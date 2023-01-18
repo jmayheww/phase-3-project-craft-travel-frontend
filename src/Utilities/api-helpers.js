@@ -16,7 +16,11 @@ function createUserTrip(userId, tripId, setState) {
       throw new Error("User is already signed up for this trip.");
     })
     .then((newUsersTrip) => {
-      setState((currentDetails) => [...currentDetails, newUsersTrip]);
+      return setState((currentDetails) => {
+        console.log('currentDetails: ', currentDetails);
+
+        return [...currentDetails, newUsersTrip];
+      });
     });
 }
 
