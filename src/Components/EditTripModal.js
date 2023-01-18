@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./Modal.module.css";
 import { RiCloseLine } from "react-icons/ri";
 
-function EditTripModal({ isOpen, setIsOpen, tripId, onUpdateTrip }) {
-  console.log("id: ", tripId);
+function EditTripModal({ setIsOpen, tripId, onUpdateTrip }) {
   const [editTrip, setEditTrip] = useState({
     title: "",
     budget: "",
@@ -11,8 +10,6 @@ function EditTripModal({ isOpen, setIsOpen, tripId, onUpdateTrip }) {
     end_date: "",
     img: "",
   });
-
-  console.log("editTrip: ", editTrip);
 
   function handleChange(e) {
     setEditTrip({ ...editTrip, [e.target.name]: e.target.value });
@@ -55,6 +52,7 @@ function EditTripModal({ isOpen, setIsOpen, tripId, onUpdateTrip }) {
                 value={editTrip.title}
                 onChange={handleChange}
                 placeholder="Title"
+                required
               ></input>
               <input
                 type="number"
@@ -62,6 +60,7 @@ function EditTripModal({ isOpen, setIsOpen, tripId, onUpdateTrip }) {
                 value={editTrip.budget}
                 onChange={handleChange}
                 placeholder="Cost"
+                required
               ></input>
               <input
                 type="datetime-local"
@@ -69,6 +68,7 @@ function EditTripModal({ isOpen, setIsOpen, tripId, onUpdateTrip }) {
                 value={editTrip.start_date}
                 onChange={handleChange}
                 placeholder="Start Date"
+                required
               ></input>
               <input
                 type="datetime-local"
@@ -76,6 +76,7 @@ function EditTripModal({ isOpen, setIsOpen, tripId, onUpdateTrip }) {
                 value={editTrip.end_date}
                 onChange={handleChange}
                 placeholder="End Date"
+                required
               ></input>
               <input
                 type="text"
@@ -83,6 +84,7 @@ function EditTripModal({ isOpen, setIsOpen, tripId, onUpdateTrip }) {
                 value={editTrip.img}
                 onChange={handleChange}
                 placeholder="Image Source"
+                required
               ></input>
               <div className={styles.modalActions}>
                 <div className={styles.actionsContainer}>

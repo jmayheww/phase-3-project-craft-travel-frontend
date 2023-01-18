@@ -17,8 +17,6 @@ function createUserTrip(userId, tripId, setState) {
     })
     .then((newUsersTrip) => {
       return setState((currentDetails) => {
-        console.log('currentDetails: ', currentDetails);
-
         return [...currentDetails, newUsersTrip];
       });
     });

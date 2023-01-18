@@ -13,6 +13,7 @@ function SignupModal({
 }) {
   const [userInput, setUserInput] = useState("");
 
+  console.log("userTripBookings: ", userTripBookings.user);
   function handleUserInput(e) {
     setUserInput(e.target.value);
   }
@@ -24,7 +25,7 @@ function SignupModal({
     );
     const alreadySignedup = userTripBookings
       .map((userTrip) => {
-        return userTrip.user_id;
+        return userTrip.user.id;
       })
       .includes(Number(existingUser?.id));
 
@@ -72,6 +73,7 @@ function SignupModal({
                 value={userInput}
                 onChange={handleUserInput}
                 className="user-signup"
+                required
               ></input>
               <div className={styles.modalActions}>
                 <div className={styles.actionsContainer}>

@@ -14,7 +14,7 @@ function CreateTripModal({ setIsOpen, url, onAddTrip }) {
   function handleChange(e) {
     setNewTrip({ ...newTrip, [e.target.name]: e.target.value });
   }
-  console.log(newTrip);
+
 
   function handleTripCreation(e) {
     e.preventDefault();
@@ -54,6 +54,7 @@ function CreateTripModal({ setIsOpen, url, onAddTrip }) {
                 value={newTrip.title}
                 onChange={handleChange}
                 placeholder="Title"
+                required
               ></input>
               <input
                 type="number"
@@ -61,6 +62,7 @@ function CreateTripModal({ setIsOpen, url, onAddTrip }) {
                 value={newTrip.budget}
                 onChange={handleChange}
                 placeholder="Cost"
+                required
               ></input>
               <input
                 type="datetime-local"
@@ -68,6 +70,7 @@ function CreateTripModal({ setIsOpen, url, onAddTrip }) {
                 value={newTrip.start_date}
                 onChange={handleChange}
                 placeholder="Start Date"
+                required
               ></input>
               <input
                 type="datetime-local"
@@ -75,6 +78,7 @@ function CreateTripModal({ setIsOpen, url, onAddTrip }) {
                 value={newTrip.end_date}
                 onChange={handleChange}
                 placeholder="End Date"
+                required
               ></input>
               <input
                 type="text"
@@ -82,6 +86,7 @@ function CreateTripModal({ setIsOpen, url, onAddTrip }) {
                 value={newTrip.img}
                 onChange={handleChange}
                 placeholder="Image Source"
+                required
               ></input>
               <div className={styles.modalActions}>
                 <div className={styles.actionsContainer}>
