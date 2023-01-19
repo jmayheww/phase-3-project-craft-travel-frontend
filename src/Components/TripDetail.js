@@ -4,9 +4,8 @@ import { ModalButton } from "./ModalButton";
 import styles from "./Modal.module.css";
 import SignupModal from "./SignupModal";
 
-function TripDetail({ url, onAddUser, users, handleHideDetails }) {
+function TripDetail({ url, onAddUser, users, handleHideDetails, trips }) {
   const { tripId } = useParams();
-  const [bookingId, setBookingId] = useState();
   const [tripDetails, setTripDetails] = useState([]);
   const [userTripBookings, setUserTripBookings] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -15,21 +14,17 @@ function TripDetail({ url, onAddUser, users, handleHideDetails }) {
     fetch(`${url}/${tripId}`)
       .then((resp) => resp.json())
       .then((usersTrips) => {
-        console.log("usersTrips: ", usersTrips);
-        const selectedTripDetails = usersTrips[0].trip;
-        console.log("selectedTripDetails: ", selectedTripDetails);
-        const bookings = usersTrips.map((booking) => booking.user);
-        console.log("bookings: ", bookings);
+        const selectedTripDetails = trips[0];
+
         setTripDetails(selectedTripDetails);
         setUserTripBookings(usersTrips);
       });
   }, [tripId]);
 
-  const { budget, start_date, end_date, id } = tripDetails;
-  console.log('tripDetails: ', tripDetails);
+  const tD = tripDetails;
 
-  const startDate = new Date(start_date).toLocaleDateString();
-  const endDate = new Date(end_date).toLocaleDateString();
+  const startDate = new Date(tD.start_date).toLocaleDateString();
+  const endDate = new Date(tD.end_date).toLocaleDateString();
 
   function handleSignUpClick() {
     setIsOpen(true);
@@ -60,9 +55,9 @@ function TripDetail({ url, onAddUser, users, handleHideDetails }) {
       <h2>Trip Details:</h2>
       <p>
         {" "}
-        Date: {startDate} - {endDate}
+        Date: {startDate} - {endDate}{" "}
       </p>
-      <p>Cost: ${budget}</p>
+      <p>Cost: ${tD.budget}</p>
       {userTripBookings && (
         <div className="sign-up-details">
           <h2>Registration Log:</h2>

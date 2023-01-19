@@ -26,6 +26,7 @@ function App() {
       .then((resp) => resp.json())
       .then((data) => {
         setTrips(data);
+        console.log("data: ", data);
       });
     nav("/trips");
   }, []);

@@ -13,7 +13,6 @@ function SignupModal({
 }) {
   const [userInput, setUserInput] = useState("");
 
-  console.log("userTripBookings: ", userTripBookings.user);
   function handleUserInput(e) {
     setUserInput(e.target.value);
   }
