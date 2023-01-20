@@ -9,7 +9,19 @@
 
 <p>
 
-**Table of Contents**_generated with [DocToc](https://github.com/thlorenz/doctoc)_
+**Table of Contents** _generated with [DocToc](https://github.com/thlorenz/doctoc)_
+
+- [GitHub repositories](#github-repositories)
+  - [Project Philosophy](#project-philosophy)
+  - [General User Experience](#general-user-experience)
+  - [Specific Features](#specific-features)
+  - [Installation and Set-up Guide](#installation-and-set-up-guide)
+  - [How to Use](#how-to-use)
+  - [Resources and Documentation](#resources-and-documentation)
+  - [Technologies Used](#technologies-used)
+    - [Languages and Frameworks](#languages-and-frameworks)
+    - [Package Installations](#package-installations)
+  - [Author](#author)
 
 ## GitHub repositories
 
