@@ -35,7 +35,7 @@ function TripList({ trips, url, setTrips, onUpdateTrip, nav }) {
           {trips ? renderTrips : "Loading...please wait"}
         </div>
         <div className="trips-view">
-          {tripId ? <Outlet /> : <div>Please select a trip</div>}
+          {tripId ? <Outlet /> : <div className="filler-txt">Please select a trip</div>}
         </div>
       </div>
     </div>

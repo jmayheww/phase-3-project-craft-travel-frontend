@@ -26,7 +26,6 @@ function App() {
       .then((resp) => resp.json())
       .then((data) => {
         setTrips(data);
-        console.log("data: ", data);
       });
     nav("/trips");
   }, []);
@@ -78,12 +77,12 @@ function App() {
     <main ref={mainRef}>
       <Header toggleDarkMode={handleDarkModeToggle} />
       <div>
+        <Search trips={trips} setFilterTrips={setFilterTrips} />
         <ModalButton
           handleClick={handleNewTripClick}
-          className={styles.primaryBtn}
+          className={styles.primaryBtnAdd}
           text="Add new trip!"
         />
-        <Search trips={trips} setFilterTrips={setFilterTrips} />
       </div>
       <Routes>
         <Route

@@ -152,6 +152,15 @@ main.dark-mode .trips-container {
   width: 100%;
 }
 
+.trips-list {
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  border: 3px solid #455054;
+}
+
 
 .trips-view {
   width: 75%;
@@ -168,11 +177,31 @@ main.dark-mode .trips-container {
   padding: .5rem;
   border: 3px solid transparent;
   transition: all .1s;
+  width: 50%;
+
 }
 
 .trip-card.selected {
   border: 3px solid var(--light-header);
 
+}
+
+.search {
+  display: flex;
+  margin: 20px;
+  padding: 1rem;
+  justify-content: center;
+
+}
+
+img {
+  margin-left: 20px;
+}
+
+.filler-txt {
+  display: flex;
+  justify-content: center;
+  margin: auto;
 }
 
 /* Modal*/

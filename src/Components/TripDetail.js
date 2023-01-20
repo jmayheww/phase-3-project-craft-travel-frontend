@@ -34,7 +34,7 @@ function TripDetail({ url, onAddUser, users, handleHideDetails, trips }) {
     const updatedBookings = userTripBookings.filter(
       (userTrip) => userTrip.id !== id
     );
-    console.log("updatedBookings: ", updatedBookings);
+
     return setUserTripBookings(updatedBookings);
   }
 
@@ -60,42 +60,45 @@ function TripDetail({ url, onAddUser, users, handleHideDetails, trips }) {
       <p>Cost: ${tD.budget}</p>
       {userTripBookings && (
         <div className="sign-up-details">
-          <h2>Registration Log:</h2>
+          <h2> Recent bookings</h2>
           <ul>
-            {userTripBookings
-              .sort((a, b) => b.id - a.id)
-              .map((userTrip) => {
-                const timeStamp = userTrip.created_at;
-                const registrationDate = new Date(
-                  timeStamp
-                ).toLocaleDateString();
-                const registrationTime = new Date(
-                  timeStamp
-                ).toLocaleTimeString();
+            {userTripBookings.map((userTrip) => {
+              const timeStamp = userTrip.created_at;
+              const registrationDate = new Date(timeStamp).toLocaleDateString();
+              const registrationTime = new Date(timeStamp).toLocaleTimeString();
 
-                const userId = userTrip.user.id;
-                const userName = userTrip.user.name;
-                const userTripId = userTrip.id;
+              const userId = userTrip.user.id;
+              const userName = userTrip.user.name;
+              const userTripId = userTrip.id;
 
-                return (
-                  <li key={userId}>
-                    {registrationTime} : {userName} registered on{" "}
-                    {registrationDate}
-                    <button onClick={() => handleCancelBooking(userTripId)}>
-                      Cancel Booking
-                    </button>
-                  </li>
-                );
-              })}
+              return (
+                <li key={userId} className={styles.registerItem}>
+                  {registrationDate} : {userName} registered at{" "}
+                  {registrationTime}
+                  <button
+                    onClick={() => handleCancelBooking(userTripId)}
+                    className={styles.cancelReg}
+                  >
+                    Cancel Booking
+                  </button>
+                </li>
+              );
+            })}
           </ul>
-          <ModalButton
-            handleClick={handleSignUpClick}
-            className={styles.primaryBtn}
-            text="Sign up!"
-          />
-          <button type="button" onClick={handleHideDetails}>
-            Hide Details
-          </button>
+          <div className={styles.detailButtons}>
+            <ModalButton
+              handleClick={handleSignUpClick}
+              className={styles.primaryBtn}
+              text="Sign up!"
+            />
+            <button
+              type="button"
+              onClick={handleHideDetails}
+              className={styles.primaryBtn}
+            >
+              Hide Details
+            </button>
+          </div>
           {isOpen && (
             <SignupModal
               setIsOpen={setIsOpen}

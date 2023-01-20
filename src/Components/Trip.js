@@ -29,21 +29,30 @@ function Trip({ trip, selected, url, onTripDelete, onUpdateTrip, nav }) {
 
   return (
     <div className={`trip-card ${selected ? "selected" : ""}`}>
-      <div className="remove" onClick={() => handleDeleteClick(id)}>
+      <div
+        className={styles.deleteTripBtn}
+        onClick={() => handleDeleteClick(id)}
+      >
         <span>remove</span>
         <span>&times;</span>
       </div>
       <h2>{title}</h2>
       <img src={img} alt="picture of trip" width="300" height="200" />
-      <button onClick={() => handleTripClick(id)}>
-        {/* {selected ? "Hide Details" : "Show details"} */}
-        Show Details
-      </button>
-      <ModalButton
-        handleClick={handleEditClick}
-        className={styles.primaryBtn}
-        text="Edit Trip"
-      />
+      <div className={styles.tripButtons}>
+        <button
+          onClick={() => handleTripClick(id)}
+          className={styles.primaryBtn}
+        >
+          Show Details
+        </button>
+        <button className={styles.primaryBtnEdit}>Edit Trip</button>
+        {/* <button className={styles.primaryBtn}>Edit Trip</button> */}
+        {/* <ModalButton
+          handleClick={handleEditClick}
+          className={styles.primaryBtnEdit}
+          text="Edit Trip"
+        /> */}
+      </div>
       {isEditOpen && (
         <EditTripModal
           isOpen={isEditOpen}

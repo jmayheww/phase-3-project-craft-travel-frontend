@@ -59,7 +59,7 @@ function SignupModal({
       <div className={styles.centered}>
         <div className={styles.modal}>
           <div className={styles.modalHeader}>
-            <h5 className={styles.heading}>Dialog</h5>
+            <h5 className={styles.heading}>Book a trip!</h5>
           </div>
           <button className={styles.closeBtn} onClick={() => setIsOpen(false)}>
             <RiCloseLine style={{ marginBottom: "-3px" }} />
@@ -76,7 +76,7 @@ function SignupModal({
               ></input>
               <div className={styles.modalActions}>
                 <div className={styles.actionsContainer}>
-                  <button className={styles.deleteBtn}>Add Traveler</button>
+                  <button className={styles.submitBtn}>Add Traveler</button>
                   <button
                     type="button"
                     className={styles.cancelBtn}

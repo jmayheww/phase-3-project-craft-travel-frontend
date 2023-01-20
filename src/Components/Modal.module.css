@@ -6,7 +6,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    position: absolute;
+    position: fixed;
 }
 
 .centered {
@@ -64,13 +64,7 @@
 }
 
 .formContent {
-    /* width: 80%;
-    margin: 0 10% 16px 10%;
-    padding: 16px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; */
+
     padding: 10px;
     font-size: 14px;
     color: #2c3e50;
@@ -139,7 +133,7 @@
     transform: translate(-4px, 4px);
 }
 
-.deleteBtn {
+.submitBtn {
     margin-top: 10px;
     cursor: pointer;
     font-weight: 500;
@@ -148,11 +142,11 @@
     font-size: 0.8rem;
     border: none;
     color: #fff;
-    background: #ff3e4e;
+    background: #D45769;
     transition: all 0.25s ease;
 }
 
-.deleteBtn_trip {
+.submitBtn_trip {
     margin-top: 10px;
     margin-left: 25%;
     cursor: pointer;
@@ -162,17 +156,17 @@
     font-size: 0.8rem;
     border: none;
     color: #fff;
-    background: #ff3e4e;
+    background: #D45769;
     transition: all 0.25s ease;
 }
 
-.deleteBtn:hover {
+.submitBtn:hover {
     box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
     transform: translateY(-5px);
     background: #ff3e4e;
 }
 
-.deleteBtn_trip:hover {
+.submitBtn_trip:hover {
     box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
     transform: translateY(-5px);
     background: #ff3e4e;
@@ -193,17 +187,6 @@
 }
 
 .cancelBtn_trip {
-    /* margin-top: 10px;
-    margin-right: 25%;
-    cursor: pointer;
-    font-weight: 500;
-    padding: 11px 28px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    border: none;
-    color: #2c3e50;
-    background: #fcfcfc;
-    transition: all 0.25s ease; */
     margin-top: 10px;
     margin-right: 25%;
     cursor: pointer;
@@ -230,7 +213,10 @@
 }
 
 .primaryBtn {
-    margin: 20px 10px;
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    width: 10rem;
     cursor: pointer;
     font-weight: 500;
     padding: 13px 25px;
@@ -238,11 +224,134 @@
     font-size: 0.8rem;
     border: none;
     color: white;
-    background: #185adb;
+    background: #308695;
+    transition: all 0.25s ease;
+}
+
+.cancelBtn {
+    display: flex;
+    text-align: center;
+    justify-content: left;
+
+    cursor: pointer;
+    font-weight: 500;
+    padding: 0.5rem 3rem;
+    border-radius: 15px;
+    font-size: 0.6rem;
+    border: none;
+    color: white;
+    background: #308695;
+    transition: all 0.25s ease;
+}
+
+.cancelReg {
+    /* display: flex; */
+    text-align: center;
+    /* justify-content: left; */
+    white-space: nowrap;
+    cursor: pointer;
+    font-weight: 500;
+    /* margin: auto; */
+    margin-left: 3px;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    font-size: 0.6rem;
+    border: none;
+    color: white;
+    background: #308695;
+    transition: all 0.25s ease;
+}
+
+.deleteTripBtn {
+    /* display: flex; */
+    text-align: center;
+    width: 5rem;
+    align-self: flex-end;
+
+    /* justify-content: left; */
+    white-space: nowrap;
+    cursor: pointer;
+    font-weight: 500;
+    /* margin: auto; */
+    margin-left: 50%;
+
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    font-size: 0.6rem;
+    border: none;
+    color: white;
+    background: #ff3e4e;
+    transition: all 0.25s ease;
+}
+
+.primaryBtnAdd {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 1rem;
+    width: 15rem;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 13px 25px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    border: none;
+    color: white;
+    background: #308695;
+    transition: all 0.25s ease;
+}
+
+.primaryBtnEdit {
+    cursor: pointer;
+    font-weight: 500;
+    padding: 13px 25px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    border: none;
+    color: white;
+    background: #D45769;
     transition: all 0.25s ease;
 }
 
 .primaryBtn:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px -10px rgba(24, 90, 219, 0.6);
+}
+
+.primaryBtnEdit:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px -10px rgba(24, 90, 219, 0.6);
+}
+
+.primaryBtnAdd:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px -10px rgba(24, 90, 219, 0.6);
+}
+
+.cancelReg:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px -10px rgba(24, 90, 219, 0.6);
+}
+
+.tripButtons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: -4px;
+
+}
+
+.detailButtons {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: -4px;
+
+}
+
+.registerItem {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+    margin-left: -40px;
+    width: 25rem;
 }

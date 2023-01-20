@@ -88,7 +88,7 @@ function EditTripModal({ setIsOpen, tripId, onUpdateTrip }) {
               ></input>
               <div className={styles.modalActions}>
                 <div className={styles.actionsContainer}>
-                  <button className={styles.deleteBtn_trip} type="submit">
+                  <button className={styles.submitBtn_trip} type="submit">
                     Edit Trip
                   </button>
                   <button
