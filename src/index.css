@@ -181,6 +181,7 @@ main.dark-mode .trips-container {
 
 }
 
+
 .trip-card.selected {
   border: 3px solid var(--light-header);
 
@@ -195,7 +196,7 @@ main.dark-mode .trips-container {
 }
 
 img {
-  margin-left: 20px;
+  margin-left: 5px;
 }
 
 .filler-txt {

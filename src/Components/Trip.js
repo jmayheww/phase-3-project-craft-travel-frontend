@@ -37,6 +37,7 @@ function Trip({ trip, selected, url, onTripDelete, onUpdateTrip, nav }) {
         <span>&times;</span>
       </div>
       <h2>{title}</h2>
+
       <img src={img} alt="picture of trip" width="300" height="200" />
       <div className={styles.tripButtons}>
         <button

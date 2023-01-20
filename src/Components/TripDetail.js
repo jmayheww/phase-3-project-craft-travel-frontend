@@ -52,10 +52,10 @@ function TripDetail({ url, onAddUser, users, handleHideDetails, trips }) {
 
   return (
     <div className="details">
-      <h2>Trip Details:</h2>
+      <h2>Details:</h2>
       <p>
         {" "}
-        Date: {startDate} - {endDate}{" "}
+        Dates: {startDate} - {endDate}{" "}
       </p>
       <p>Cost: ${tD.budget}</p>
       {userTripBookings && (
