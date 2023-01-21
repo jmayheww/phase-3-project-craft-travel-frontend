@@ -25,9 +25,8 @@
 
 ## GitHub repositories
 
-1. Frontend repo: https://github.com/jmayheww/phase-3-project-craft-travel-frontend
-
-2. Backend repo: https://github.com/jmayheww/phase-3-sinatra-react-project
+- [Frontend repository](https://github.com/jmayheww/phase-3-project-craft-travel-frontend)
+- [Backend repository](https://github.com/jmayheww/phase-3-sinatra-react-project)
 
 ## Project Philosophy
 
