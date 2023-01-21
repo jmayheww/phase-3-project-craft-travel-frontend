@@ -91,7 +91,7 @@ Trip cards are presented with an initial title and image, but users are free to 
 
 [![Watch the video](https://youtu.be/dbH9zFfT6nc)](https://youtu.be/dbH9zFfT6nc)
 
-[label](vscode-local:/c%3A/Users/joshs/Downloads/phase%203%20craft%20travels%20project%20walkthrough.mp4)
+[label](./images/Markdown/phase%203%20craft%20travels%20project%20walkthrough.mp4)
 
 ## Resources and Documentation
 
