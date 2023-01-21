@@ -89,7 +89,7 @@ Trip cards are presented with an initial title and image, but users are free to 
 
 **Embedded below is a short video overview of how to easily navigate and use the Craft Travels App for curating your next travel experience**
 
-> ![Walkthrough](./images/Markdown/phase%203%20craft%20travels%20project%20walkthrough.mp4)
+> [Walkthrough](https://www.youtube.com/watch?v=dbH9zFfT6nc&list=PPSV)
 
 ## Resources and Documentation
 
