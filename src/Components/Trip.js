@@ -46,13 +46,14 @@ function Trip({ trip, selected, url, onTripDelete, onUpdateTrip, nav }) {
         >
           Show Details
         </button>
-        <button className={styles.primaryBtnEdit}>Edit Trip</button>
-        {/* <button className={styles.primaryBtn}>Edit Trip</button> */}
-        {/* <ModalButton
-          handleClick={handleEditClick}
+        <button
           className={styles.primaryBtnEdit}
-          text="Edit Trip"
-        /> */}
+          onClick={() => {
+            handleEditClick();
+          }}
+        >
+          Edit Trip
+        </button>
       </div>
       {isEditOpen && (
         <EditTripModal

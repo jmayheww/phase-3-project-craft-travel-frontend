@@ -115,7 +115,7 @@ Trip cards are presented with an initial title and image, but users are free to 
 - Active Record
 - Sinatra
 - Rake
-- Faker (seeding data for testing)
+- Faker (seed data for testing)
 
 ## Author
 
