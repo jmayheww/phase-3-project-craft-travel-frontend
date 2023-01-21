@@ -87,9 +87,13 @@ Trip cards are presented with an initial title and image, but users are free to 
 
 ## How to Use
 
-1. **_Browse entire Trips collection and/or search for particular trip by title_**
+**Embedded below is a short video overview of how to easily navigate and use the Craft Travels App for curating your next travel experience**
 
->https://youtube.com/clip/Ugkx8PQkM35g3OuL9b1wTyHNl9uRGMLhec9z
+
+[label](https://www.youtube.com/watch?v%3DdbH9zFfT6nc%26list%3DPPSV)
+
+
+
 
 ## Resources and Documentation
 
